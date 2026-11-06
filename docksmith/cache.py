@@ -1,6 +1,6 @@
 # docksmith/cache.py
 # ============================================================
-#  PREKSHA — File 1: Build Cache System
+#  File 1: Build Cache System
 #  Test: python3 -m pytest tests/test_cache.py -v
 # ============================================================
 

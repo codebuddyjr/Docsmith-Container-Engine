@@ -1,6 +1,6 @@
 # # docksmith/main.py
 # # ============================================================
-# #  PIYUSH — File 3: CLI Entry Point
+# #  File 3: CLI Entry Point
 # #  All 4 commands: build, images, rmi, run
 # #  Write this LAST — wires everything together
 # # ============================================================

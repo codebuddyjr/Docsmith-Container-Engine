@@ -1,6 +1,6 @@
 # # docksmith/state.py
 # # ============================================================
-# #  PIYUSH — File 2: State Management
+# # File 2: State Management
 # #  Manages ~/.docksmith/ directory layout
 # #  Manifest read/write + digest computation
 # # ============================================================

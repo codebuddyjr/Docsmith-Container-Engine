@@ -1,6 +1,6 @@
 # docksmith/reporter.py
 # ============================================================
-#  PREKSHA — File 2: Build Output Formatter
+# File 2: Build Output Formatter
 #  Test: python3 -m pytest tests/test_reporter.py -v
 # ============================================================
 

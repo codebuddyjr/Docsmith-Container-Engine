@@ -1,6 +1,6 @@
 # # docksmith/models.py
 # # ============================================================
-# #  PIYUSH — File 1: Shared Data Models
+# #  File 1: Shared Data Models
 # #  Write this FIRST. Share with team immediately.
 # #  Everyone imports ImageManifest, LayerEntry, ImageConfig
 # # ============================================================

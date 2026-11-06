@@ -1,0 +1,163 @@
+/* Premium Aesthetics for Docksmith GUI */
+
+:root {
+    --bg-color: #0f172a;
+    --panel-bg: rgba(30, 41, 59, 0.7);
+    --panel-border: rgba(51, 65, 85, 0.6);
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image:
+        radial-gradient(at 0% 0%, rgba(29, 78, 216, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(124, 58, 237, 0.15) 0px, transparent 50%);
+    background-attachment: fixed;
+}
+
+/* Scrollbar Control */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Glassmorphism */
+.glass-panel {
+    background: var(--panel-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--panel-border);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Nav Tabs */
+.nav-btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #94a3b8;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+.nav-btn:hover {
+    color: #f8fafc;
+}
+.nav-btn.active {
+    color: #60a5fa;
+    border-bottom-color: #60a5fa;
+    background-color: rgba(96, 165, 250, 0.1);
+}
+
+/* Tab Content Visibility */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+.tab-content.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Form Controls */
+.ds-input {
+    width: 100%;
+    background-color: rgba(15, 23, 42, 0.6);
+    border: 1px solid #334155;
+    color: #e2e8f0;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+.ds-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.ds-checkbox {
+    width: 1rem;
+    height: 1rem;
+    background-color: transparent;
+    border-radius: 0.25rem;
+    border: 1px solid #475569;
+    accent-color: #3b82f6;
+}
+
+.ds-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.ds-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.ds-btn-primary {
+    background-color: #2563eb;
+    color: white;
+}
+.ds-btn-primary:hover:not(:disabled) {
+    background-color: #1d4ed8;
+}
+
+.ds-btn-success {
+    background-color: #059669;
+    color: white;
+}
+.ds-btn-success:hover:not(:disabled) {
+    background-color: #047857;
+}
+
+.ds-btn-danger {
+    background-color: #dc2626;
+    color: white;
+}
+.ds-btn-danger:hover:not(:disabled) {
+    background-color: #b91c1c;
+}
+
+/* Target elements for layer visualization */
+.layer-node {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(30, 41, 59, 0.9);
+    border: 1px solid #475569;
+    border-radius: 8px;
+    padding: 1rem;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+.layer-connector {
+    width: 2px;
+    height: 30px;
+    background: #475569;
+}

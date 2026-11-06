@@ -71,6 +71,16 @@ def isolate_and_run(
     if _can_attempt_namespace_isolation():
         preexec_fn = _namespace_preexec(rootfs, workdir or "/")
         cwd = None
+    else:
+        import shutil
+        if shutil.which("unshare"):
+            command = [
+                "unshare", "-r", "-R", rootfs,
+                "/bin/sh", "-c",
+                'cd "$1" && shift && exec "$@"',
+                "--", workdir or "/"
+            ] + command
+            cwd = None
 
     try:
         proc = subprocess.Popen(

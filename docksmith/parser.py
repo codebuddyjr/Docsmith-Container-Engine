@@ -1,6 +1,6 @@
 # docksmith/parser.py
 # ============================================================
-#  PROTHAM — File 1: Docksmithfile Parser
+# File 1: Docksmithfile Parser
 # ============================================================
 
 import json

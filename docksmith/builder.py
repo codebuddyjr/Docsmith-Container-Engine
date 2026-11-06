@@ -1,6 +1,6 @@
 # docksmith/builder.py
 # ============================================================
-#  PROTHAM — File 3: Build Engine / Orchestrator
+#  File 3: Build Engine / Orchestrator
 # ============================================================
 
 import os
@@ -105,7 +105,7 @@ def build_image(context_dir: str, name: str, tag: str, no_cache: bool = False):
                     copy_hashes=copy_hashes,
                 )
 
-            if cached_digest:
+            if cached_digest and layer_exists(cached_digest):
                 print(f"{label} [CACHE HIT]")
                 layers.append(LayerEntry(digest=cached_digest, size=get_layer_size(cached_digest), createdBy=instruction_text))
                 prev_digest = cached_digest
@@ -134,7 +134,7 @@ def build_image(context_dir: str, name: str, tag: str, no_cache: bool = False):
                     copy_hashes=None,
                 )
 
-            if cached_digest:
+            if cached_digest and layer_exists(cached_digest):
                 print(f"{label} [CACHE HIT]")
                 layers.append(LayerEntry(digest=cached_digest, size=get_layer_size(cached_digest), createdBy=instruction_text))
                 prev_digest = cached_digest
@@ -185,6 +185,7 @@ def _execute_copy(src_pattern, dest, context_dir, current_layers, workdir) -> st
 
     with tempfile.TemporaryDirectory(prefix="docksmith_copy_") as rootfs:
         _assemble_rootfs(current_layers, rootfs)
+        before = snapshot_filesystem(rootfs)
         if workdir:
             os.makedirs(os.path.join(rootfs, workdir.lstrip("/")), exist_ok=True)
 
@@ -213,8 +214,9 @@ def _execute_copy(src_pattern, dest, context_dir, current_layers, workdir) -> st
             elif os.path.isdir(src_path):
                 shutil.copytree(src_path, os.path.join(dest_abs, os.path.basename(src_path)), dirs_exist_ok=True)
 
-        all_paths = collect_all_paths(dest_abs)
-        tar_bytes = create_delta_tar(dest_abs, all_paths)
+        after = snapshot_filesystem(rootfs)
+        changed_paths = compute_delta_paths(before, after, rootfs)
+        tar_bytes = create_delta_tar(rootfs, changed_paths) if changed_paths else create_delta_tar(rootfs, [])
         return store_layer(tar_bytes)
 
 

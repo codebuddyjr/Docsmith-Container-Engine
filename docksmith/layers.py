@@ -1,6 +1,6 @@
 # docksmith/layers.py
 # ============================================================
-#  PROTHAM — File 2: Layer Creation & Storage
+# File 2: Layer Creation & Storage
 # ============================================================
 
 import os
@@ -23,6 +23,9 @@ def sha256_of_bytes(data: bytes) -> str:
 
 def sha256_of_file(filepath: str) -> str:
     h = hashlib.sha256()
+    if os.path.islink(filepath):
+        h.update(os.readlink(filepath).encode('utf-8'))
+        return h.hexdigest()
     with open(filepath, "rb") as f:
         for chunk in iter(lambda: f.read(65536), b""):
             h.update(chunk)
@@ -39,7 +42,7 @@ def create_delta_tar(base_dir: str, paths_to_include: list) -> bytes:
 
     with tarfile.open(fileobj=buf, mode="w:") as tar:
         for abs_path in sorted_paths:
-            if not os.path.exists(abs_path):
+            if not os.path.lexists(abs_path):
                 continue
             rel_path = os.path.relpath(abs_path, base_dir)
             tarinfo  = tar.gettarinfo(name=abs_path, arcname=rel_path)
